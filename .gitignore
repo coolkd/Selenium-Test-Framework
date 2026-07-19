@@ -1,0 +1,22 @@
+.DS_Store
+# macOS system files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# Maven build output
+target/
+
+# TestNG output
+test-output/
+
+# Logs and reports
+logs/
+reports/
+
+# Screenshots
+src/test/resources/screenshots/
+
