@@ -3,7 +3,6 @@ pipeline {
 
     tools {
         maven 'Maven-3.9.16'
-        // jdk 'Java-21'  // Uncomment if you want Jenkins to use a specific JDK
     }
 
     triggers {
@@ -47,7 +46,7 @@ pipeline {
                     reportName: 'Extent Report',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
-                    allowMissing: true   // ensures link appears even if file missing
+                    allowMissing: true
                 ])
 
                 // Archive artifacts so they appear in Jenkins UI
@@ -66,7 +65,7 @@ pipeline {
                          <p>Job: ${env.JOB_NAME}<br/>
                          Build Number: ${env.BUILD_NUMBER}<br/>
                          Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                         <p>HTML Report: <a href="${env.BUILD_URL}HTML_20Extent_20Report/">Click here</a></p>
+                         <p>HTML Report: <a href="http://localhost:8080/job/OrangeHRM_Pipeline_Job/Extent_Report/">Click here</a></p>
                          <br/>
                          <p>Best regards,<br/>Automation Team</p>""",
                 to: 'kldp2099@gmail.com'
@@ -81,7 +80,7 @@ pipeline {
                          <p>Job: ${env.JOB_NAME}<br/>
                          Build Number: ${env.BUILD_NUMBER}<br/>
                          Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                         <p>HTML Report: <a href="${env.BUILD_URL}HTML_20Extent_20Report/">Click here</a></p>
+                         <p>HTML Report: <a href="http://localhost:8080/job/OrangeHRM_Pipeline_Job/Extent_Report/">Click here</a></p>
                          <br/>
                          <p>Best regards,<br/>Automation Team</p>""",
                 to: 'kldp2099@gmail.com'
