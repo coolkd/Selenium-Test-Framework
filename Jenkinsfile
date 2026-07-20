@@ -3,16 +3,10 @@ pipeline {
 
     tools {
         maven 'Maven-3.9.16'
-        // jdk 'Java-21'  // Uncomment if you want Jenkins to use a specific JDK
     }
 
     triggers {
         githubPush()
-    }
-
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '10'))
-        disableConcurrentBuilds()
     }
 
     stages {
@@ -37,10 +31,8 @@ pipeline {
 
         stage('Publish Reports') {
             steps {
-                // Publish JUnit XML results
                 junit 'target/surefire-reports/*.xml'
 
-                // Publish ExtentReport HTML with required parameters
                 publishHTML([
                     reportDir: 'src/test/resources/ExtentReport',
                     reportFiles: 'ExtentReport.html',
@@ -50,7 +42,6 @@ pipeline {
                     allowMissing: false
                 ])
 
-                // Archive artifacts so they appear in Jenkins UI
                 archiveArtifacts artifacts: 'src/test/resources/ExtentReport/*.html', fingerprint: true
             }
         }
@@ -66,7 +57,7 @@ pipeline {
                          <p>Job: ${env.JOB_NAME}<br/>
                          Build Number: ${env.BUILD_NUMBER}<br/>
                          Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                         <p>HTML Report: <a href="http://localhost:8080/job/OrangeHRM_Build/HTML_20Extent_20Report/">Click here</a></p>
+                         <p>HTML Report: <a href="${env.BUILD_URL}HTML_20Extent_20Report/">Click here</a></p>
                          <br/>
                          <p>Best regards,<br/>Automation Team</p>""",
                 to: 'kldp2099@gmail.com'
@@ -81,7 +72,7 @@ pipeline {
                          <p>Job: ${env.JOB_NAME}<br/>
                          Build Number: ${env.BUILD_NUMBER}<br/>
                          Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                         <p>HTML Report: <a href="http://localhost:8080/job/OrangeHRM_Build/HTML_20Extent_20Report/">Click here</a></p>
+                         <p>HTML Report: <a href="${env.BUILD_URL}HTML_20Extent_20Report/">Click here</a></p>
                          <br/>
                          <p>Best regards,<br/>Automation Team</p>""",
                 to: 'kldp2099@gmail.com'
