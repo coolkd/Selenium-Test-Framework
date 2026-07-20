@@ -1,6 +1,6 @@
 package com.orangehrm.test;
 
-import org.testng.SkipException;
+
 import org.testng.annotations.Test;
 
 import com.orangehrm.base.BaseClass;
@@ -10,6 +10,7 @@ public class DummyClass extends BaseClass {
 
 	@Test
 	public void dummyTest() {
+		//Test Checkin
 		//ExtentManager.startTest("Dummy Test1 Test"); --This has been implemented in TestListener
 		String title = getDriver().getTitle();
 		ExtentManager.logStep("Verifying the title");

@@ -31,8 +31,8 @@ public class BaseClass {
 	// protected static WebDriver driver;
 	// private static ActionDriver actionDriver;
 
-	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-	private static ThreadLocal<ActionDriver> actionDriver = new ThreadLocal<>();
+	private static  ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+	private static  ThreadLocal<ActionDriver> actionDriver = new ThreadLocal<>();
 	public static final Logger logger = LoggerManager.getLogger(BaseClass.class);
 
 	protected ThreadLocal<SoftAssert> softAssert = ThreadLocal.withInitial(SoftAssert::new);

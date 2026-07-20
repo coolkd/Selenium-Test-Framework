@@ -2,7 +2,7 @@ package com.orangehrm.test;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
+
 import org.testng.annotations.Test;
 
 import com.orangehrm.base.BaseClass;
