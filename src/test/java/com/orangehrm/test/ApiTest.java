@@ -12,7 +12,6 @@ public class ApiTest {
 
 	@Test
 	public void verifyGetUserAPI() {
-		//Testing Jenkins
 
 		SoftAssert softAssert = new SoftAssert();
 

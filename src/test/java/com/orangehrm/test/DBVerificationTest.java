@@ -22,6 +22,8 @@ public class DBVerificationTest extends BaseClass {
 	public void setupPages() {
 		loginPage = new LoginPage(getDriver());
 		homePage = new HomePage(getDriver());
+		
+		//Jenkin testing only
 
 	}
 
