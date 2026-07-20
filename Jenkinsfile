@@ -3,10 +3,16 @@ pipeline {
 
     tools {
         maven 'Maven-3.9.16'
+        // jdk 'Java-21'  // Uncomment if you want Jenkins to use a specific JDK
     }
 
     triggers {
         githubPush()
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        disableConcurrentBuilds()
     }
 
     stages {
@@ -31,17 +37,20 @@ pipeline {
 
         stage('Publish Reports') {
             steps {
+                // Publish JUnit XML results
                 junit 'target/surefire-reports/*.xml'
 
+                // Publish ExtentReport HTML with required parameters
                 publishHTML([
-                    reportDir: 'src/test/resources/ExtentReport',
+                    reportDir: 'src/test/resources/ExtentReport',   // ✅ your actual path
                     reportFiles: 'ExtentReport.html',
                     reportName: 'Extent Report',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
-                    allowMissing: false
+                    allowMissing: true   // ensures link appears even if file missing
                 ])
 
+                // Archive artifacts so they appear in Jenkins UI
                 archiveArtifacts artifacts: 'src/test/resources/ExtentReport/*.html', fingerprint: true
             }
         }
