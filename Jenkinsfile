@@ -41,7 +41,7 @@ pipeline {
 
                 // Publish ExtentReport HTML with required parameters
                 publishHTML([
-                    reportDir: 'src/test/resources/ExtentReport',   // ✅ your actual path
+                    reportDir: 'target/ExtentReport',   // ✅ updated to target folder
                     reportFiles: 'ExtentReport.html',
                     reportName: 'Extent Report',
                     keepAll: true,
@@ -50,7 +50,7 @@ pipeline {
                 ])
 
                 // Archive artifacts so they appear in Jenkins UI
-                archiveArtifacts artifacts: 'src/test/resources/ExtentReport/*.html', fingerprint: true
+                archiveArtifacts artifacts: 'target/ExtentReport/*.html', fingerprint: true
             }
         }
     }
@@ -65,7 +65,7 @@ pipeline {
                          <p>Job: ${env.JOB_NAME}<br/>
                          Build Number: ${env.BUILD_NUMBER}<br/>
                          Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                         <p>HTML Report: <a href="http://localhost:8080/job/OrangeHRM_Pipeline_Job/Extent_Report/">Click here</a></p>
+                         <p>HTML Report: <a href="${env.BUILD_URL}Extent_Report/">Click here</a></p>
                          <br/>
                          <p>Best regards,<br/>Automation Team</p>""",
                 to: 'kldp2099@gmail.com'
@@ -80,7 +80,7 @@ pipeline {
                          <p>Job: ${env.JOB_NAME}<br/>
                          Build Number: ${env.BUILD_NUMBER}<br/>
                          Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                         <p>HTML Report: <a href="http://localhost:8080/job/OrangeHRM_Pipeline_Job/Extent_Report/">Click here</a></p>
+                         <p>HTML Report: <a href="${env.BUILD_URL}Extent_Report/">Click here</a></p>
                          <br/>
                          <p>Best regards,<br/>Automation Team</p>""",
                 to: 'kldp2099@gmail.com'
