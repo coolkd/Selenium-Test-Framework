@@ -28,12 +28,24 @@ public class ExtentManager {
 
 	public synchronized static ExtentReports getReporter() {
 		if (extent == null) {
-			String reportPath = System.getProperty("user.dir") + "/src/test/resources/ExtentReport/ExtentReport.html";
+			// String reportPath = System.getProperty("user.dir") +
+			// "/src/test/resources/ExtentReport/ExtentReport.html";
+			// ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
+			// Creates the report folder inside the current project workspace.
+			// In Jenkins, user.dir points to the Jenkins workspace.
+			String reportDir = System.getProperty("user.dir") + File.separator + "target" + File.separator
+					+ "ExtentReport";
+			// Create the folder if it does not exist.
+			File directory = new File(reportDir);
+
+			if (!directory.exists()) {
+				directory.mkdirs();
+			}
+
+			// Complete Extent Report file path.
+			String reportPath = reportDir + File.separator + "ExtentReport.html";
+
 			ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
-			//String reportDir = System.getProperty("user.dir") + "/target/ExtentReport";
-			//new File(reportDir).mkdirs();  // ensures folder exists
-			//String reportPath = reportDir + "/ExtentReport.html";
-			//ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
 
 			spark.config().setReportName("Automation Test Report");
 			spark.config().setDocumentTitle("OrangeHRM Report");
@@ -41,14 +53,16 @@ public class ExtentManager {
 
 			extent = new ExtentReports();
 			extent.attachReporter(spark);
-			// Adding system information
+
+			// Adding system information.
 			extent.setSystemInfo("Operating System", System.getProperty("os.name"));
+
 			extent.setSystemInfo("Java Version", System.getProperty("java.version"));
+
 			extent.setSystemInfo("User Name", System.getProperty("user.name"));
-
 		}
-		return extent;
 
+		return extent;
 	}
 
 	// Start the test
